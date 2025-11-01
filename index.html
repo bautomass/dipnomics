@@ -3,333 +3,575 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dipnomics: Raw Market Data</title>
+    <title>Dipnomics - Premium Trading Platform</title>
     <link rel="stylesheet" href="index.css">
     <script src="https://kit.fontawesome.com/5dea7eb179.js" defer crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/5dea7eb179.js" defer crossorigin="anonymous"></script>
-    <script src="cdt.js" defer ></script>
-    <script src="getdata.js" defer ></script>
-    
-    <script src="modal.js" defer ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="cdt.js" defer></script>
+    <script src="getdata.js" defer></script>
+    <script src="modal.js" defer></script>
+    <script src="app.js" defer></script>
 </head>
 <body>
 <header>    
-     <div class="wrapper">
-    <div class="t-h" id="t-h">
-    <div class="l-c"><h1 id="style-logo">DIPNOMICS</h1>
-    </div>
-    <div class="userArea">
-        <i class="fa-solid fa-house-user"></i>
-        <i class="fa-solid fa-chevron-down"></i>
-        <div class="userDropDown">
-            <div class="dropDownContent">
-                <ul id="userOptions">
-                    <li class="userDropDownContent" id="userLogin">Login</li>
-                    <li class="userDropDownContent" id="userRegister">Register</li>
-                    <li class="userDropDownContent" id="userTerms">Terms Of Service</li>
-                </ul>
+    <div class="wrapper">
+        <div class="t-h" id="t-h">
+            <div class="l-c">
+                <h1 id="style-logo">DIPNOMICS</h1>
+            </div>
+            <div class="userArea">
+                <i class="fa-solid fa-house-user"></i>
+                <i class="fa-solid fa-chevron-down"></i>
+                <div class="userDropDown">
+                    <div class="dropDownContent">
+                        <ul id="userOptions">
+                            <li class="userDropDownContent" id="userLogin">Login</li>
+                            <li class="userDropDownContent" id="userRegister">Register</li>
+                            <li class="userDropDownContent" id="userDashboard">Dashboard</li>
+                            <li class="userDropDownContent" id="userSubscription">Subscription</li>
+                            <li class="userDropDownContent" id="userTerms">Terms Of Service</li>
+                            <li class="userDropDownContent" id="userLogout" style="display:none;">Logout</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="apiArea">
+                <h3 id="apiHeading">API</h3>
+                <i class="fa-solid fa-database"></i>
+            </div>
+            <hr id="vertical-logo">
+            <div class="vertSplit"></div>
+
+            <div class="mob-nav-container" id="mob-nav">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <div class="search-container">
+                <form class="search" action="#">
+                    <input id="search-input" type="text" placeholder="Search ( / ) " name="search">
+                </form>
+            </div>
+
+            <div class="n-c" id="n-c">
+                <ul class="menu">
+                    <li id="underline" data-page="home">Home</li>
+                    <li id="underline" data-page="market">Market</li>
+                    <li id="underline" data-page="auto-trade">Auto Trade</li>
+                    <li id="underline" data-page="manual-trade">Manual Trade</li>
+                    <li id="underline" data-page="portfolio">Portfolio</li>
+                    <li id="underline" data-page="subscription">Pricing</li>
+                </ul>   
             </div>
         </div>
     </div>
-    <div class="apiArea"><h3 id="apiHeading">API</h3>
-        <i class="fa-solid fa-database"></i>
-    </div>
-    <hr id="vertical-logo">
-    <div class="vertSplit"></div>
-
-    <div class="mob-nav-container" id="mob-nav">
-        <i class="fa-solid fa-bars"></i>
-        <!--<i class="fa-solid fa-angle-down"></i>
-        <i class="fa-solid fa-angle-down" id="fa-solid"></i>
-        -->
-     </div>
-
-<div class="search-container">
-    <form class="search" action=#>
-        <input id="search-input" type="text" placeholder="Search ( / ) " name="search" >
-        <!-- <button id="submit-btn" type="submit"><i class="fa fa-search"></i></button> -->
-      </form>
-</div>
-
-
-<div class="n-c" id="n-c">
-        <ul class="menu">
-            <li id="underline">Assets</li>
-            <li id="underline" >Exchanges</li>
-            <li id="underline" >Converter</li>
-            <li id="underline" >Watchlist</li>
-            <li id="underline" >NFTs</li>
-        </ul>   
-    </div>
-
-
-</div>
-</div>
 </header>
 
 <hr id="shadow-line" style="color: red; height: 5px;">
 
-<main>
-    <div class="container">
-        <div class="what">
-            <h2 id="tag-line">
-                Trading Crypto and other Digital Assets profitably can be challenging.<br>
-                When it comes to Blockchain and Crypto Data - <span style="text-decoration: underline;">WE ARE CONFIDENT!</span><br>
-                Our database stores data for more than 63.000 different Crypto Assets.<br>
-                Our Smart Data can help you.<br>
-                <span style="text-transform: uppercase; text-decoration: underline; padding-top: 20px; padding-bottom: 20px;">Trade smart, Trade efficiently, Trade confidently.</span><br>
-                Dipnomics AI can predict price with 96% accuracy.<br>
-                Get the maximum ROI on your investment!<br>
-                Sample data available: <button class="download" id="download">Download</button> 
-                <hr class="tag-seperator">
-            </h2>
+<!-- Subscription Modal -->
+<div id="subscriptionModal" class="modal">
+    <div class="modal-content subscription-modal">
+        <span class="close">&times;</span>
+        <h2>Choose Your Plan</h2>
+        <div class="subscription-tabs">
+            <button class="tab-btn active" data-period="monthly">Monthly</button>
+            <button class="tab-btn" data-period="quarterly">Quarterly</button>
+            <button class="tab-btn" data-period="yearly">Yearly</button>
+        </div>
+        <div class="subscription-plans" id="subscriptionPlans">
+            <!-- Plans will be loaded here -->
+        </div>
+    </div>
+</div>
 
-<hr class="tag-seperator">
-    <div class="coinSubmitContainer">
-        <h3 id="submitHeading">We're NOT just Smart Data provider.<br>
-            We can also give a massive exposure to Crypto brands!<br>
-            On avarage there's 16M unique users browsing Dipnomics every day.</h3>
-                <div class="coinSubmit"><span style="text-decoration: underline;">List your Crypto project on Dipnomics!</span><br>
-                    <div class="arrowWrap">
-                        <span id="get-listed" style="color: #03f303; font-weight: 100;">GET LISTED</span>
-                            <div class="getArrow">
-                                <i class="fa-solid fa-arrow-right-long"> 
-                                    <div class="roundShadow"></div>
-                                </i>
+<!-- Login/Register Modal -->
+<div id="authModal" class="modal">
+    <div class="modal-content auth-modal">
+        <span class="close">&times;</span>
+        <div class="auth-tabs">
+            <button class="auth-tab-btn active" data-auth="login">Login</button>
+            <button class="auth-tab-btn" data-auth="register">Register</button>
+        </div>
+        <div id="loginForm" class="auth-form">
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button id="loginBtn" class="auth-btn">Login</button>
+        </div>
+        <div id="registerForm" class="auth-form" style="display:none;">
+            <input type="text" id="registerName" placeholder="Full Name" required>
+            <input type="email" id="registerEmail" placeholder="Email" required>
+            <input type="password" id="registerPassword" placeholder="Password" required>
+            <input type="password" id="registerConfirm" placeholder="Confirm Password" required>
+            <button id="registerBtn" class="auth-btn">Register</button>
+        </div>
+    </div>
+</div>
+
+<main>
+    <!-- Hero Section -->
+    <section id="homePage" class="page active">
+        <div class="hero-section">
+            <div class="container">
+                <h2 class="hero-title">
+                    Professional Trading Platform<br>
+                    <span class="highlight">Powered by AI</span>
+                </h2>
+                <p class="hero-subtitle">
+                    Auto trading, manual trading, and advanced analytics all in one place.<br>
+                    Trade smarter with 96% AI prediction accuracy.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" id="startTradingBtn">Start Trading</button>
+                    <button class="btn-secondary" id="viewPricingBtn">View Pricing</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">63,666+</div>
+                        <div class="stat-label">Cryptocurrencies</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">96%</div>
+                        <div class="stat-label">AI Accuracy</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">16M+</div>
+                        <div class="stat-label">Daily Users</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-section">
+            <div class="container">
+                <h2 class="section-title">Platform Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-robot"></i>
+                        <h3>Auto Trading</h3>
+                        <p>Set up automated trading strategies based on AI predictions and technical indicators</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                        <h3>Manual Trading</h3>
+                        <p>Full control with advanced order types, real-time charts, and market depth</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <h3>Advanced Analytics</h3>
+                        <p>Comprehensive market data, predictions, and portfolio performance metrics</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <h3>Secure & Reliable</h3>
+                        <p>Bank-level security with encrypted transactions and API access</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Page -->
+    <section id="marketPage" class="page">
+        <div class="container">
+            <div class="data-content-exp">
+                <h2 id="table-heading">Top Cryptocurrencies by Market Cap</h2>
+                <span id="heading-details">
+                    Real-time data for 63,666 Cryptocurrencies (13,362 actively traded)
+                </span>
+            </div>
+
+            <div class="market-filters">
+                <input type="text" id="marketSearch" placeholder="Search cryptocurrencies...">
+                <select id="sortBy">
+                    <option value="marketCap">Market Cap</option>
+                    <option value="price">Price</option>
+                    <option value="change">24h Change</option>
+                    <option value="volume">Volume</option>
+                </select>
+            </div>
+
+            <div class="data">
+                <table id="marketTable">
+                    <tr id="fit-content">
+                        <th id="count">#</th>
+                        <th id="asset-name">Name</th>
+                        <th id="price">Price</th>
+                        <th class="content-width">24h Change</th>
+                        <th>7D Prediction</th>
+                        <th class="content-width">Market Cap</th>
+                        <th>Volume</th>
+                        <th class="content-width-max">Circulating Supply</th>
+                        <th>Chart</th>
+                        <th>Actions</th>
+                    </tr>
+
+                    <!--BITCOIN-->
+                    <tr id="change-color-btc">
+                        <td><input class="star" type="checkbox" title="favorite" checked>1</td>
+                        <td id="dyncolB"> 
+                            <img src="img/bitcoin.png" style="width:16px; margin-right:3px;">Bitcoin 
+                            <span style="font-size:10px">(BTC)</span>
+                            <span><button id="buy-coin">BUY</button></span>
+                        </td>
+                        <td id="btceuro"></td>
+                        <td id="change"><span style="color:#ff0015;">-0.78%</span></td>
+                        <td id="prediction">
+                            <button id="buy-data">
+                                <i class="fa-solid fa-lock"></i>Unlock
+                            </button>
+                        </td>
+                        <td id="cap">?379.04B</td>
+                        <td id="volume">?34.43B</td>
+                        <td id="supply">19,140,231</td>
+                        <td> 
+                            <img src="img/BTC-EUR-1d.svg" style="max-width:100px;">
+                        </td>
+                        <td id="data-row">
+                            <button id="buy-data">Trade</button> 
+                        </td>
+                    </tr>
+
+                    <!--ETHEREUM-->
+                    <tr id="change-color-eth">
+                        <td><input class="star" type="checkbox" title="favorite" checked>2</td>
+                        <td id="dyncolE"> 
+                            <img src="img/ethereum.png" style="width:16px; margin-right:3px;">
+                            Ethereum <span style="font-size:10px">(ETH)</span><span><button id="buy-coin">BUY</button></span> 
+                        </td>
+                        <td id="etheur"></td>
+                        <td id="change"><span style="color:#ff0015;">-0.71%</span></td>
+                        <td id="prediction"><button id="buy-data"><i class="fa-solid fa-lock"></i>Unlock</button></td>
+                        <td id="cap">?191.33B</td>
+                        <td id="volume">?22.87B</td>
+                        <td id="supply">122,223,733</td>
+                        <td><img src="img/ETH-EUR-1d.svg" style="max-width:100px;"></td>
+                        <td id="data-row"><button id="buy-data">Trade</button></td>
+                    </tr>
+
+                    <!-- Additional coins (blurred for demo) -->
+                    <tr class="blur">
+                        <td><input class="star" type="checkbox" title="favorite" checked>3</td>
+                        <td><img src="img/tethersmall.svg" style="width:16px; margin-right:3px;">
+                            Tether <span style="font-size:10px">(USDT)</span><span><button id="buy-coin">BUY</button></span></td>
+                        <td>?0.950294</td>
+                        <td><span style="color:#03f303; font-size:16px;">0.28%</span></td>
+                        <td id="prediction"><button id="buy-data" style="cursor: default"><i class="fa-solid fa-lock"></i>Unlock</button></td>
+                        <td id="cap">?63.37B</td>
+                        <td id="volume">?59.96B</td>
+                        <td id="supply">67,550,404,113</td>
+                        <td><img src="img/USDT-EUR-1d.svg" style="max-width:100px;"></td>
+                        <td id="data-row"><button id="buy-data" style="cursor: default">Trade</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auto Trading Page -->
+    <section id="autoTradePage" class="page">
+        <div class="container">
+            <h2 class="section-title">Auto Trading Dashboard</h2>
+            
+            <div class="auto-trade-grid">
+                <div class="strategy-panel">
+                    <h3>Active Strategies</h3>
+                    <div id="strategiesList" class="strategies-list">
+                        <!-- Strategies will be loaded here -->
+                    </div>
+                    <button class="btn-primary" id="createStrategyBtn">
+                        <i class="fa-solid fa-plus"></i> Create New Strategy
+                    </button>
+                </div>
+
+                <div class="strategy-config-panel">
+                    <h3>Strategy Configuration</h3>
+                    <div id="strategyConfig" class="strategy-form">
+                        <div class="form-group">
+                            <label>Strategy Name</label>
+                            <input type="text" id="strategyName" placeholder="My Trading Strategy">
+                        </div>
+                        <div class="form-group">
+                            <label>Cryptocurrency</label>
+                            <select id="strategyCoin">
+                                <option value="BTC">Bitcoin (BTC)</option>
+                                <option value="ETH">Ethereum (ETH)</option>
+                                <option value="BNB">Binance Coin (BNB)</option>
+                                <option value="ADA">Cardano (ADA)</option>
+                                <option value="SOL">Solana (SOL)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Trading Pair</label>
+                            <select id="strategyPair">
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                                <option value="USDT">USDT</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Strategy Type</label>
+                            <select id="strategyType">
+                                <option value="dca">DCA (Dollar Cost Averaging)</option>
+                                <option value="momentum">Momentum Trading</option>
+                                <option value="mean-reversion">Mean Reversion</option>
+                                <option value="ai-signal">AI Signal Based</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Investment Amount</label>
+                            <input type="number" id="investmentAmount" placeholder="1000" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Risk Level</label>
+                            <div class="risk-selector">
+                                <button class="risk-btn" data-risk="low">Low</button>
+                                <button class="risk-btn active" data-risk="medium">Medium</button>
+                                <button class="risk-btn" data-risk="high">High</button>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Stop Loss (%)</label>
+                            <input type="number" id="stopLoss" placeholder="5" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Take Profit (%)</label>
+                            <input type="number" id="takeProfit" placeholder="10" step="0.1">
+                        </div>
+                        <button class="btn-primary" id="saveStrategyBtn">Save Strategy</button>
+                        <button class="btn-danger" id="deleteStrategyBtn" style="display:none;">Delete Strategy</button>
+                    </div>
+                </div>
+
+                <div class="performance-panel">
+                    <h3>Performance Overview</h3>
+                    <div class="performance-stats">
+                        <div class="perf-stat">
+                            <div class="perf-label">Total Profit</div>
+                            <div class="perf-value positive">+?0.00</div>
+                        </div>
+                        <div class="perf-stat">
+                            <div class="perf-label">Total Trades</div>
+                            <div class="perf-value">0</div>
+                        </div>
+                        <div class="perf-stat">
+                            <div class="perf-label">Win Rate</div>
+                            <div class="perf-value">0%</div>
+                        </div>
+                        <div class="perf-stat">
+                            <div class="perf-label">Active Strategies</div>
+                            <div class="perf-value">0</div>
+                        </div>
+                    </div>
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manual Trading Page -->
+    <section id="manualTradePage" class="page">
+        <div class="container">
+            <h2 class="section-title">Manual Trading</h2>
+            
+            <div class="manual-trade-layout">
+                <div class="trading-chart-panel">
+                    <div class="chart-controls">
+                        <select id="chartCoin">
+                            <option value="BTC-EUR">BTC/EUR</option>
+                            <option value="ETH-EUR">ETH/EUR</option>
+                            <option value="BNB-EUR">BNB/EUR</option>
+                            <option value="ADA-EUR">ADA/EUR</option>
+                            <option value="SOL-EUR">SOL/EUR</option>
+                        </select>
+                        <div class="timeframe-selector">
+                            <button class="timeframe-btn active" data-timeframe="1m">1m</button>
+                            <button class="timeframe-btn" data-timeframe="5m">5m</button>
+                            <button class="timeframe-btn" data-timeframe="15m">15m</button>
+                            <button class="timeframe-btn" data-timeframe="1h">1h</button>
+                            <button class="timeframe-btn" data-timeframe="1d">1d</button>
+                        </div>
+                    </div>
+                    <canvas id="tradingChart"></canvas>
+                    <div class="chart-info">
+                        <div class="price-info">
+                            <span id="currentPrice">?0.00</span>
+                            <span id="priceChange" class="neutral">0.00%</span>
+                        </div>
+                        <div class="market-info">
+                            <span>24h High: <span id="high24h">?0.00</span></span>
+                            <span>24h Low: <span id="low24h">?0.00</span></span>
+                            <span>24h Volume: <span id="volume24h">?0.00</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-panel">
+                    <div class="order-tabs">
+                        <button class="order-tab active" data-order-type="buy">Buy</button>
+                        <button class="order-tab" data-order-type="sell">Sell</button>
+                    </div>
+                    
+                    <div class="order-form">
+                        <div class="form-group">
+                            <label>Order Type</label>
+                            <select id="orderType">
+                                <option value="market">Market Order</option>
+                                <option value="limit">Limit Order</option>
+                                <option value="stop">Stop Loss</option>
+                                <option value="stop-limit">Stop Limit</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input type="number" id="orderAmount" placeholder="0.00" step="0.00000001">
+                            <select id="amountCurrency">
+                                <option value="crypto">BTC</option>
+                                <option value="fiat">EUR</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="limitPriceGroup" style="display:none;">
+                            <label>Limit Price</label>
+                            <input type="number" id="limitPrice" placeholder="0.00" step="0.01">
+                        </div>
+                        <div class="order-summary">
+                            <div class="summary-row">
+                                <span>Estimated Cost:</span>
+                                <span id="estimatedCost">?0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Available Balance:</span>
+                                <span id="availableBalance">?0.00</span>
+                            </div>
+                        </div>
+                        <button class="btn-primary" id="submitOrderBtn">Place Order</button>
+                    </div>
+
+                    <div class="open-orders">
+                        <h4>Open Orders</h4>
+                        <div id="openOrdersList">
+                            <!-- Orders will be loaded here -->
+                            <div class="empty-state">No open orders</div>
+                        </div>
+                    </div>
+
+                    <div class="order-history">
+                        <h4>Recent Orders</h4>
+                        <div id="orderHistoryList">
+                            <!-- Order history will be loaded here -->
+                            <div class="empty-state">No recent orders</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-<!--
-<div class="user-selection">
-    <div class="wrap-selectors">
-        <div class="watchlist" id="selectors">Watchlist </div>
-        <div class="allcrypto" id="selectors">All Crypto </div>
-        <div class="category" id="selectors">Category </div>
-        <div class="blockchain" id="selectors">Blockchain </div>
-    </div>
-</div>
--->
+    </section>
 
-<div class="m-c">
-    <div class="content flex">
-        <p id=lnch><p id="timer"></p>
-    </div>
-</div>
+    <!-- Portfolio Page -->
+    <section id="portfolioPage" class="page">
+        <div class="container">
+            <h2 class="section-title">Portfolio Overview</h2>
+            
+            <div class="portfolio-summary">
+                <div class="portfolio-card">
+                    <h3>Total Balance</h3>
+                    <div class="portfolio-value">?0.00</div>
+                    <div class="portfolio-change positive">+0.00% (24h)</div>
+                </div>
+                <div class="portfolio-card">
+                    <h3>Total Profit/Loss</h3>
+                    <div class="portfolio-value">?0.00</div>
+                    <div class="portfolio-change neutral">0.00%</div>
+                </div>
+                <div class="portfolio-card">
+                    <h3>Active Positions</h3>
+                    <div class="portfolio-value">0</div>
+                    <div class="portfolio-change">Open trades</div>
+                </div>
+            </div>
 
+            <div class="portfolio-holdings">
+                <h3>Holdings</h3>
+                <table class="holdings-table">
+                    <thead>
+                        <tr>
+                            <th>Asset</th>
+                            <th>Quantity</th>
+                            <th>Avg. Buy Price</th>
+                            <th>Current Price</th>
+                            <th>Value</th>
+                            <th>P/L</th>
+                        </tr>
+                    </thead>
+                    <tbody id="holdingsList">
+                        <tr>
+                            <td colspan="6" class="empty-state">No holdings</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
+            <div class="portfolio-chart">
+                <h3>Portfolio Performance</h3>
+                <canvas id="portfolioChart"></canvas>
+            </div>
+        </div>
+    </section>
 
-<div class="data-content-exp">
-    <h2 id="table-heading">Top Cryptocurrencies by Market Cap</h2>
-        <span id="heading-details">
-            Currently there's data for 63.666 Cryptocurrencies. 
-            (13.362 are actively traded)
-        </span><br>
-    DEMO Data { / }
-</div>
+    <!-- Subscription/Pricing Page -->
+    <section id="subscriptionPage" class="page">
+        <div class="container">
+            <h2 class="section-title">Choose Your Plan</h2>
+            <p class="section-subtitle">Select the subscription that fits your trading needs</p>
+            
+            <div class="subscription-tabs">
+                <button class="period-tab active" data-period="monthly">Monthly</button>
+                <button class="period-tab" data-period="quarterly">Quarterly</button>
+                <button class="period-tab" data-period="yearly">Yearly</button>
+            </div>
 
-<div class="data">
-    <table>
-        <tr id="fit-content">
-            <th id="count">#</th>
-            <th id="asset-name">Name</th>
-            <th id="price">Price</th>
-            <th class="content-width">1D Change</th>
-            <th >7D Prediction</th>
-            <th class="content-width">Market Cap</th>
-            <th >Volume</th>
-            <th class="content-width-max">Circulating Supply</th>
-            <th >1D Chart</th>
-            <th>CSV Data</th>
-        </tr>
-
-            <!--BITCOIN--> <!--BITCOIN--> <!--BITCOIN-->
-        <tr id="change-color-btc">
-            <td> <input class="star" type="checkbox" title="favorite" checked>1</td>
-            <td id="dyncolB"> 
-                <img src="img/bitcoin.png" style="width:16px; margin-right:3px;">Bitcoin 
-                <span style="font-size:10px">(BTC)</span>
-                    <span><button id="buy-coin">BUY</button></span>
-            </td>
-                <td id="btceuro"></td>
-                <td id="change"><span style="color:#ff0015;">-0.78%</span></td>
-                <td id="prediction">
-                    <button id="buy-data">
-                        <i class="fa-solid fa-lock"></i>Unlock
-                    </button>
-                </td>
-
-                <td id="cap">€379.04B</td>
-                <td id="volume">€34.43B</td>
-                <td id="supply">19.140.231</td>
-                <td> 
-                    <img src="img/BTC-EUR-1d.svg">
-                </td>
-                <td id="data-row">
-                    <button id="buy-data">Buy Data</button> 
-                </td>
-            </tr>
-
-            <!--ETHEREUM--> <!--ETHEREUM--> <!--ETHEREUM-->
-            <tr id="change-color-eth">
-                <td><input class="star" type="checkbox" title="favorite" checked>2 </td>
-                <td id="dyncolE"> <img src="img/ethereum.png" style="width:16px; margin-right:3px;">
-                    Ethereum <span style="font-size:10px">(ETH)</span><span><button id="buy-coin">BUY</button></span> </td>
-                <td id ="etheur"></td>
-                <td id="change"><span style="color:#ff0015;">-0.71%</span> </td>
-                <td id="prediction"><button id="buy-data"><i class="fa-solid fa-lock"></i>Unlock</button> </td>
-                <td id="cap">€191.33B</td>
-                <td id="volume">€22.87B</td>
-                <td id="supply">122.223.733</td>
-                <td><img src="img/ETH-EUR-1d.svg"></td>
-                <td id="data-row"><button id="buy-data">Buy Data</button> </td>
-            </tr>
-
-            <tr class="blur">
-                <td><input class="star" type="checkbox" title="favorite" checked>3</td>
-                <td><img src="img/tethersmall.svg" style="width:16px; margin-right:3px;">
-                    Tether <span style="font-size:10px">(USDT)</span><span><button id="buy-coin">BUY</button></span></td>
-                <td>€0.950294</td>
-                <td><span style="
-                    color:#03f303; 
-                    font-size:16px;">0.28%</span></td>
-                <td id="prediction"><button id="buy-data" style="cursor: default"><i class="fa-solid fa-lock"></i>Unlock</button></td>
-                <td id="cap">€63.37B</td>
-                <td id="volume">€59.96B</td>
-                <td id="supply">67.550.404.113</td>
-                <td><img src="img/ADA-EUR-1d.svg"></td>
-                <td id="data-row"><button id="buy-data" style="cursor: default">Buy Data</button></td>
-            </tr>
-            <tr class="blur">
-                <td><input class="star" type="checkbox" title="favorite" checked>4</td>
-                <td><img src="img/polkadotsmall.svg" style="width:16px; margin-right:3px;">
-                    Polkadot <span style="font-size:10px">(DOT)</span><span><button id="buy-coin">BUY</button></span></td>
-                <td>€227.78</td>
-                <td><span style="
-                    color:#ff0015; 
-                    font-size:16px;">-2.09%</span></td>
-                <td id="prediction"><button id="buy-data" style="cursor: default"><i class="fa-solid fa-lock"></i>Unlock</button></td>
-                <td id="cap">€53.08B</td>
-                <td id="volume">€3.07B</td>
-                <td id="supply">51.859.965.253</td>
-                <td><img src="img/XRP-EUR-1d.svg"></td>
-                <td id="data-row"><button id="buy-data" style="cursor: default">Buy Data</button></td>
-            </tr>
-            <tr class="blur">
-                <td><input class="star" type="checkbox" title="favorite" checked>5</td>
-                <td><img src="img/dogecoinsmall.svg" style="width:16px; margin-right:3px;">
-                    Dogecoin <span style="font-size:10px">(DOGE)</span><span><button id="buy-coin">BUY</button></span></td>
-                <td>€0.342568</td>
-                <td><span style="
-                    color:#03f303; 
-                    font-size:16px;">4.49%</span></td>
-                <td id="prediction"><button id="buy-data" style="cursor: default"><i class="fa-solid fa-lock"></i>Unlock</button></td>
-                <td id="cap">€37.55B</td>
-                <td id="volume">€1.12B</td>
-                <td id="supply">163.276.975</td>
-                <td><img src="img/SHIB-EUR-1d.svg"></td>
-                <td id="data-row"><button id="buy-data" style="cursor: default">Buy Data</button></td>
-            </tr>
-            <tr class="blur">
-                <td><input class="star" type="checkbox" title="favorite" checked>6</td>
-                <td><img src="img/binancesmall.svg" style="width:16px; margin-right:3px;">
-                    Binance USD <span style="font-size:10px">(BUSD)</span><span><button id="buy-coin">BUY</button></span></td>
-                <td>€0.950004</td>
-                <td><span style="
-                    color:#03f303; 
-                    font-size:16px;">3.42%</span></td>
-                <td id="prediction"><button id="buy-data" style="cursor: default"><i class="fa-solid fa-lock"></i>Unlock</button></td>
-                <td id="cap">€16.84B</td>
-                <td id="volume">€990.86M</td>
-                <td id="supply">19.555.493.338</td>
-                <td><img src="img/ADA-EUR-1d.svg"></td>
-                <td id="data-row"><button id="buy-data" style="cursor: default">Buy Data</button></td>
-            </tr>
-            <tr class="blur">
-                <td><input class="star" type="checkbox" title="favorite" checked>7</td>
-                <td><img src="img/cardanosmall.svg" style="width:16px; margin-right:3px;">
-                    Cardano<span style="font-size:10px">(ADA)</span><span><button id="buy-coin">BUY</button></span></td>
-                <td>€0.47725</td>
-                <td><span style="
-                    color:#004dff; 
-                    font-size:16px;">0.08%</span></td>
-                <td id="prediction"><button id="buy-data" style="cursor: default"><i class="fa-solid fa-lock"></i>Unlock</button></td>
-                <td id="cap">€16.49B</td>
-                <td id="volume">€5.23B</td>
-                <td id="supply">49.646.492.379</td>
-                <td><img src="img/BTC-EUR-1d.svg"></td>
-                <td id="data-row"><button id="buy-data" style="cursor: default">Buy Data</button></td>
-            </tr>
-            <tr class="blur">
-                <td><input class="star" type="checkbox" title="favorite" checked>8</td>
-                <td><img src="img/hexsmall.png" style="width:16px; margin-right:3px;">
-                    HEX <span style="font-size:10px">(HEX)</span><span><button id="buy-coin">BUY</button></span></td>
-                <td>€38.30</td>
-                <td><span style="
-                    color:#03f303; 
-                    font-size:16px;">-5.90%</span></td>
-                <td id="prediction"><button id="buy-data" style="cursor: default"><i class="fa-solid fa-lock"></i>Unlock</button></td>
-                <td id="cap">€16.36B</td>
-                <td id="volume">€862.50M</td>
-                <td id="supply">33.578.651.450</td>
-                <td><img src="img/DOGE-EUR-1d.svg"></td>
-                <td id="data-row"><button id="buy-data" style="cursor: default">Buy Data</button></td>
-            </tr>
-            <tr class="blur">
-                <td><input class="star" type="checkbox" title="favorite" checked>9</td>
-                <td><img src="img/avalanchesmall.svg" style="width:16px; margin-right:3px;">
-                    Avalanche <span style="font-size:10px">(AVA)</span><span><button id="buy-coin">BUY</button></span></td>
-                <td>€0.069238</td>
-                <td><span style="
-                    color:#03f303; 
-                    font-size:16px;">2.15%</span></td>
-                <td id="prediction"><button id="buy-data" style="cursor: default"><i class="fa-solid fa-lock"></i>Unlock</button></td>
-                <td id="cap">€13.31B</td>
-                <td id="volume">€2.23B</td>
-                <td id="supply">349.708.979</td>
-                <td><img src="img/DOT-EUR-1d.svg"></td>
-                <td id="data-row"><button id="buy-data" style="cursor: default">Buy Data</button></td>
-            </tr>
-            <tr class="blur">
-                <td><input class="star" type="checkbox" title="favorite" checked>10</td>
-                <td><img src="img/xrpsmall.svg" style="width:16px; margin-right:3px;">
-                    XRP <span style="font-size:10px">(XRP)</span><span><button id="buy-coin">BUY</button></span></td>
-                <td>€7.6525</td>
-                <td><span style="
-                    color:#03f303; 
-                    font-size:16px;">12.53%</span></td>
-                <td id="prediction"><button id="buy-data" style="cursor: default"><i class="fa-solid fa-lock"></i>Unlock</button></td>
-                <td id="cap">€9.29B</td>
-                <td id="volume">€692.11M</td>
-                <td id="supply">1.147.439.217</td>
-                <td><img src="img/HEX-EUR-1d.svg"></td>
-                <td id="data-row"><button id="buy-data" style="cursor: default">Buy Data</button></td>
-            </tr>
-        </table>
-</div>
-
-
-<!--
-<div class="w-c">
-<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-        <defs>
-        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-        </defs>
-        <g class="parallax">
-        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.4" />
-        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.2)" />
-        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.1)" />
-        <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(255,255,255,0.3)" />
-        </g>
-        </svg>
-    </div>
-    -->
+            <div class="pricing-grid" id="pricingGrid">
+                <!-- Pricing cards will be loaded here -->
+            </div>
+        </div>
+    </section>
 </main>
-<div class="footer">© 2022 Dipnomics™ | All Rights Reserved</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Dipnomics</h4>
+            <p>Professional trading platform with AI-powered predictions</p>
+        </div>
+        <div class="footer-section">
+            <h4>Features</h4>
+            <ul>
+                <li><a href="#auto-trade">Auto Trading</a></li>
+                <li><a href="#manual-trade">Manual Trading</a></li>
+                <li><a href="#market">Market Data</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="#terms">Terms of Service</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Connect</h4>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-discord"></i></a>
+                <a href="#"><i class="fa-brands fa-telegram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">? 2024 Dipnomics? | All Rights Reserved</div>
+</footer>
+
+<script src="app.js"></script>
 </body>
-<!-- <script src="streams.js"></script> -->
-<!-- <script src="mobile-nav.js"></script> -->
 </html>
