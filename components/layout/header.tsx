@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, LogOut } from "lucide-react";
+import { Menu, X, User, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -21,11 +21,14 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+        <Link href="/" className="group flex items-center space-x-2">
+          <div className="rounded-lg bg-gradient-primary p-2">
+            <Sparkles className="h-5 w-5 text-white" />
+          </div>
+          <span className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent group-hover:opacity-80 transition-opacity">
             DIPNOMICS
           </span>
         </Link>
@@ -37,21 +40,30 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                "px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                "relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200",
                 pathname === item.href
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
               )}
             >
               {item.label}
+              {pathname === item.href && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-primary" />
+              )}
             </Link>
           ))}
         </nav>
 
         {/* Right side actions */}
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="hidden md:flex">
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" className="hidden md:flex hover:bg-primary/10">
             <User className="h-5 w-5" />
+          </Button>
+          <Button
+            className="hidden md:flex btn-premium bg-gradient-primary hover:opacity-90"
+            size="sm"
+          >
+            Get Started
           </Button>
           <Button
             variant="ghost"
@@ -70,7 +82,7 @@ export function Header() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="border-t border-border bg-background md:hidden">
+        <div className="border-t border-border/50 bg-background/95 backdrop-blur-xl md:hidden">
           <nav className="container mx-auto px-4 py-4 space-y-2">
             {navItems.map((item) => (
               <Link
@@ -78,19 +90,18 @@ export function Header() {
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={cn(
-                  "block px-3 py-2 text-base font-medium rounded-md transition-colors",
+                  "block px-4 py-3 text-base font-medium rounded-lg transition-colors",
                   pathname === item.href
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                 )}
               >
                 {item.label}
               </Link>
             ))}
             <div className="pt-4 border-t border-border">
-              <Button variant="ghost" className="w-full justify-start">
-                <User className="mr-2 h-4 w-4" />
-                Account
+              <Button className="w-full btn-premium bg-gradient-primary">
+                Get Started
               </Button>
             </div>
           </nav>

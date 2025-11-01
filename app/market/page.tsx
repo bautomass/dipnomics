@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { formatCurrency, formatPercentage, formatCompactNumber } from "@/lib/utils";
-import { TrendingUp, TrendingDown } from "lucide-react";
-import Image from "next/image";
+import { TrendingUp, TrendingDown, Search, Filter } from "lucide-react";
 
 // Mock market data - replace with API call
 const mockMarketData = [
@@ -18,7 +18,7 @@ const mockMarketData = [
     marketCap: 824000000000,
     volume24h: 28000000000,
     circulatingSupply: 19600000,
-    image: "/img/bitcoin.png",
+    trend: "up" as const,
   },
   {
     symbol: "ETH",
@@ -28,7 +28,7 @@ const mockMarketData = [
     marketCap: 300000000000,
     volume24h: 15000000000,
     circulatingSupply: 120000000,
-    image: "/img/ethereum.png",
+    trend: "down" as const,
   },
   {
     symbol: "BNB",
@@ -38,7 +38,27 @@ const mockMarketData = [
     marketCap: 46500000000,
     volume24h: 1200000000,
     circulatingSupply: 150000000,
-    image: "/img/binancesmall.svg",
+    trend: "up" as const,
+  },
+  {
+    symbol: "SOL",
+    name: "Solana",
+    price: 98,
+    change24h: 5.12,
+    marketCap: 42000000000,
+    volume24h: 800000000,
+    circulatingSupply: 428000000,
+    trend: "up" as const,
+  },
+  {
+    symbol: "ADA",
+    name: "Cardano",
+    price: 0.48,
+    change24h: -0.89,
+    marketCap: 16500000000,
+    volume24h: 520000000,
+    circulatingSupply: 34650000000,
+    trend: "down" as const,
   },
 ];
 
@@ -49,7 +69,6 @@ export default function MarketPage() {
 
   useEffect(() => {
     // Here you would fetch real market data via WebSocket or API
-    // For now using mock data
   }, []);
 
   const filteredData = marketData
@@ -73,57 +92,70 @@ export default function MarketPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      {/* Header Section */}
       <div className="mb-8">
-        <h1 className="mb-2 text-3xl font-bold md:text-4xl">Market Overview</h1>
-        <p className="text-muted-foreground">
-          Real-time data for 63,666 cryptocurrencies (13,362 actively traded)
+        <div className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+          REAL-TIME MARKET DATA
+        </div>
+        <h1 className="mb-2 text-4xl font-extrabold md:text-5xl">
+          Market
+          <span className="block gradient-text">Overview</span>
+        </h1>
+        <p className="text-lg text-muted-foreground">
+          Track 63,666+ cryptocurrencies in real-time
         </p>
       </div>
 
-      {/* Filters */}
+      {/* Filters - Premium Design */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row">
-        <Input
-          placeholder="Search cryptocurrencies..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1"
-        />
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value as any)}
-          className="rounded-md border border-input bg-background px-3 py-2 text-sm"
-        >
-          <option value="marketCap">Market Cap</option>
-          <option value="price">Price</option>
-          <option value="change">24h Change</option>
-          <option value="volume">Volume</option>
-        </select>
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            placeholder="Search cryptocurrencies..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10 h-12 glass border-border/50 focus:border-primary"
+          />
+        </div>
+        <div className="relative">
+          <Filter className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as any)}
+            className="flex h-12 w-full rounded-lg border border-border/50 bg-background px-10 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          >
+            <option value="marketCap">Market Cap</option>
+            <option value="price">Price</option>
+            <option value="change">24h Change</option>
+            <option value="volume">Volume</option>
+          </select>
+        </div>
       </div>
 
-      {/* Market Table - Desktop */}
-      <div className="hidden overflow-x-auto md:block">
-        <table className="w-full border-collapse">
+      {/* Market Table - Desktop - Premium */}
+      <div className="hidden overflow-hidden rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm md:block">
+        <table className="w-full">
           <thead>
-            <tr className="border-b border-border bg-muted/50">
-              <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider">
+            <tr className="border-b border-border/50 bg-secondary/30">
+              <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 #
               </th>
-              <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider">
-                Name
+              <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Asset
               </th>
-              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider">
+              <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Price
               </th>
-              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider">
+              <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 24h Change
               </th>
-              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider">
+              <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Market Cap
               </th>
-              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider">
+              <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Volume
               </th>
-              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider">
+              <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Actions
               </th>
             </tr>
@@ -132,46 +164,51 @@ export default function MarketPage() {
             {filteredData.map((coin, index) => (
               <tr
                 key={coin.symbol}
-                className="border-b border-border transition-colors hover:bg-muted/50"
+                className="border-b border-border/30 transition-all hover:bg-primary/5 cursor-pointer group"
               >
-                <td className="px-4 py-4">{index + 1}</td>
-                <td className="px-4 py-4">
-                  <div className="flex items-center gap-2">
-                    <div className="relative h-6 w-6">
-                      {/* <Image src={coin.image} alt={coin.name} fill className="object-contain" /> */}
-                      <div className="h-6 w-6 rounded-full bg-primary/20" />
+                <td className="px-6 py-4">
+                  <div className="font-semibold text-muted-foreground">#{index + 1}</div>
+                </td>
+                <td className="px-6 py-4">
+                  <div className="flex items-center gap-3">
+                    <div className={`h-10 w-10 rounded-full bg-gradient-primary flex items-center justify-center text-white font-bold text-sm`}>
+                      {coin.symbol[0]}
                     </div>
                     <div>
-                      <div className="font-semibold">{coin.name}</div>
+                      <div className="font-bold text-foreground">{coin.name}</div>
                       <div className="text-xs text-muted-foreground">{coin.symbol}</div>
                     </div>
                   </div>
                 </td>
-                <td className="px-4 py-4 text-right font-semibold">
-                  {formatCurrency(coin.price, "EUR")}
+                <td className="px-6 py-4 text-right">
+                  <div className="font-bold text-lg">{formatCurrency(coin.price, "EUR")}</div>
                 </td>
-                <td className="px-4 py-4 text-right">
+                <td className="px-6 py-4 text-right">
                   <div
-                    className={`flex items-center justify-end gap-1 ${
-                      coin.change24h >= 0 ? "text-green-500" : "text-red-500"
+                    className={`flex items-center justify-end gap-2 font-semibold ${
+                      coin.change24h >= 0 ? "text-success" : "text-destructive"
                     }`}
                   >
                     {coin.change24h >= 0 ? (
-                      <TrendingUp className="h-4 w-4" />
+                      <TrendingUp className="h-5 w-5" />
                     ) : (
-                      <TrendingDown className="h-4 w-4" />
+                      <TrendingDown className="h-5 w-5" />
                     )}
                     {formatPercentage(coin.change24h)}
                   </div>
                 </td>
-                <td className="px-4 py-4 text-right text-muted-foreground">
-                  {formatCompactNumber(coin.marketCap)}
+                <td className="px-6 py-4 text-right">
+                  <div className="text-muted-foreground">{formatCompactNumber(coin.marketCap)}</div>
                 </td>
-                <td className="px-4 py-4 text-right text-muted-foreground">
-                  {formatCompactNumber(coin.volume24h)}
+                <td className="px-6 py-4 text-right">
+                  <div className="text-muted-foreground">{formatCompactNumber(coin.volume24h)}</div>
                 </td>
-                <td className="px-4 py-4 text-right">
-                  <Button variant="outline" size="sm">
+                <td className="px-6 py-4 text-right">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all"
+                  >
                     Trade
                   </Button>
                 </td>
@@ -181,26 +218,33 @@ export default function MarketPage() {
         </table>
       </div>
 
-      {/* Market Cards - Mobile */}
+      {/* Market Cards - Mobile - Premium */}
       <div className="grid gap-4 md:hidden">
         {filteredData.map((coin, index) => (
-          <Card key={coin.symbol}>
+          <Card key={coin.symbol} className="card-premium glass border-border/50">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-primary/20" />
+                  <div className={`h-12 w-12 rounded-xl bg-gradient-primary flex items-center justify-center text-white font-bold`}>
+                    {coin.symbol[0]}
+                  </div>
                   <div>
                     <CardTitle className="text-lg">{coin.name}</CardTitle>
                     <p className="text-sm text-muted-foreground">{coin.symbol}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-lg font-semibold">{formatCurrency(coin.price, "EUR")}</div>
+                  <div className="text-xl font-bold">{formatCurrency(coin.price, "EUR")}</div>
                   <div
-                    className={`text-sm ${
-                      coin.change24h >= 0 ? "text-green-500" : "text-red-500"
+                    className={`text-sm font-semibold flex items-center justify-end gap-1 ${
+                      coin.change24h >= 0 ? "text-success" : "text-destructive"
                     }`}
                   >
+                    {coin.change24h >= 0 ? (
+                      <TrendingUp className="h-4 w-4" />
+                    ) : (
+                      <TrendingDown className="h-4 w-4" />
+                    )}
                     {formatPercentage(coin.change24h)}
                   </div>
                 </div>
@@ -209,16 +253,16 @@ export default function MarketPage() {
             <CardContent>
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <p className="text-muted-foreground">Market Cap</p>
+                  <p className="text-muted-foreground mb-1">Market Cap</p>
                   <p className="font-semibold">{formatCompactNumber(coin.marketCap)}</p>
                 </div>
                 <div>
-                  <p className="text-muted-foreground">24h Volume</p>
+                  <p className="text-muted-foreground mb-1">24h Volume</p>
                   <p className="font-semibold">{formatCompactNumber(coin.volume24h)}</p>
                 </div>
               </div>
-              <Button className="mt-4 w-full" variant="outline">
-                Trade
+              <Button className="mt-4 w-full btn-premium" variant="gradient">
+                Trade Now
               </Button>
             </CardContent>
           </Card>
