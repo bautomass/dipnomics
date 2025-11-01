@@ -57,7 +57,7 @@ export default function HomePage() {
               </div>
               <div className="h-4 w-px bg-border" />
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-gold">?2.4B+</span>
+                <span className="text-2xl font-bold text-gold">&euro;2.4B+</span>
                 <span>Traded this month</span>
               </div>
             </div>
@@ -159,7 +159,7 @@ export default function HomePage() {
                 <p className="text-muted-foreground">AI never sleeps. Your profits keep growing.</p>
               </div>
               <div className="card-premium glass rounded-2xl p-8 text-center">
-                <div className="mb-4 text-5xl font-bold gradient-text">?0</div>
+                <div className="mb-4 text-5xl font-bold gradient-text">&euro;0</div>
                 <h3 className="mb-2 text-xl font-semibold">Hidden Fees</h3>
                 <p className="text-muted-foreground">Transparent pricing. What you see is what you pay.</p>
               </div>
