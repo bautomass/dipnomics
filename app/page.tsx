@@ -177,7 +177,7 @@ export default function HomePage() {
               Ready to 10X Your Returns?
             </h2>
             <p className="mb-8 text-xl text-muted-foreground">
-              Join the elite traders who've already made millions with Dipnomics
+              Join the elite traders who&apos;ve already made millions with Dipnomics
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button asChild size="lg" className="btn-premium h-14 px-10 text-lg font-bold">
