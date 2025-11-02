@@ -11,39 +11,39 @@ export default function PricingPage() {
   const [period, setPeriod] = useState<SubscriptionPeriod>("monthly");
 
   return (
-    <div className="container mx-auto px-4 py-12 md:py-20">
+    <div className="container mx-auto px-4 py-12 md:py-20 bg-white">
       {/* Hero Section */}
       <div className="mx-auto mb-16 max-w-4xl text-center">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-5 py-2.5 text-sm font-bold text-primary tracking-wide">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-50 px-5 py-2 text-sm font-bold text-blue-700 border border-blue-100">
           <TrendingUp className="h-4 w-4" />
           <span>PROFESSIONAL TRADING PLATFORMS</span>
         </div>
-        <h1 className="mb-4 text-5xl font-extrabold md:text-6xl lg:text-7xl">
+        <h1 className="mb-4 text-5xl font-extrabold text-gray-900 md:text-6xl">
           Choose Your
           <span className="block gradient-text">Success Level</span>
         </h1>
-        <p className="mx-auto max-w-2xl text-lg text-muted-foreground md:text-xl">
+        <p className="mx-auto max-w-2xl text-lg text-gray-600">
           Every plan includes our profit-generating algorithms. No promises?just results.
         </p>
       </div>
 
-      {/* Period Selector - Premium Design */}
+      {/* Period Selector */}
       <div className="mb-12 flex justify-center">
-        <div className="glass rounded-full border border-white/10 p-1 inline-flex gap-2">
+        <div className="inline-flex rounded-full border border-gray-300 bg-white p-1 gap-1">
           {(["monthly", "quarterly", "yearly"] as SubscriptionPeriod[]).map((p) => (
             <Button
               key={p}
               variant={period === p ? "default" : "ghost"}
               onClick={() => setPeriod(p)}
-              className={`relative capitalize transition-all font-semibold ${
+              className={`capitalize transition-all font-semibold ${
                 period === p
-                  ? "bg-gradient-primary shadow-lg shadow-primary/50 text-white"
-                  : "hover:bg-white/5"
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "text-gray-700 hover:bg-gray-50"
               }`}
             >
               {p}
               {p === "yearly" && (
-                <span className="ml-2 rounded-full bg-success/20 px-2 py-0.5 text-xs text-success font-bold">
+                <span className="ml-2 rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-700 font-bold">
                   Save 33%
                 </span>
               )}
@@ -52,7 +52,7 @@ export default function PricingPage() {
         </div>
       </div>
 
-      {/* Pricing Cards - Premium Layout */}
+      {/* Pricing Cards */}
       <div className="grid gap-8 md:grid-cols-3">
         {pricingPlans[period].map((plan, index) => {
           const isProfessional = plan.plan === "professional";
@@ -66,14 +66,14 @@ export default function PricingPage() {
           return (
             <Card
               key={plan.plan}
-              className={`group relative h-full transition-all duration-500 ${
+              className={`h-full transition-all ${
                 isProfessional
-                  ? "card-premium border-primary/50 shadow-2xl shadow-primary/30 scale-105 md:scale-110 ring-2 ring-primary/20"
-                  : "card-premium glass hover:scale-105"
+                  ? "border-blue-500 shadow-xl ring-2 ring-blue-100 scale-105 md:scale-110"
+                  : "border-gray-200 hover:shadow-lg"
               }`}
             >
               {isProfessional && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-gradient-primary px-6 py-1.5 text-xs font-bold text-white shadow-lg">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-6 py-1.5 text-xs font-bold text-white shadow-lg">
                   MOST POPULAR
                 </div>
               )}
@@ -83,21 +83,21 @@ export default function PricingPage() {
                   <div
                     className={`rounded-xl p-3 ${
                       isProfessional
-                        ? "bg-gradient-primary text-white shadow-lg shadow-primary/50"
-                        : "bg-primary/10 text-primary"
+                        ? "bg-blue-600 text-white"
+                        : "bg-blue-50 text-blue-600"
                     }`}
                   >
                     <Icon className="h-6 w-6" />
                   </div>
-                  <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
+                  <CardTitle className="text-2xl font-bold text-gray-900">{plan.name}</CardTitle>
                 </div>
 
                 <div className="mb-2">
-                  <span className="text-5xl font-extrabold">?{plan.price}</span>
-                  <span className="text-muted-foreground">/{period.slice(0, 3)}</span>
+                  <span className="text-5xl font-extrabold text-gray-900">?{plan.price}</span>
+                  <span className="text-gray-600">/{period.slice(0, 3)}</span>
                 </div>
                 {plan.savings && (
-                  <div className="inline-block rounded-full bg-success/20 px-3 py-1 text-sm font-bold text-success border border-success/30">
+                  <div className="inline-block rounded-full bg-green-50 px-3 py-1 text-sm font-bold text-green-700 border border-green-200">
                     {plan.savings}
                   </div>
                 )}
@@ -107,10 +107,10 @@ export default function PricingPage() {
                 <ul className="space-y-4">
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start gap-3">
-                      <div className="mt-0.5 rounded-full bg-success/20 p-1 border border-success/30">
-                        <Check className="h-4 w-4 text-success" />
+                      <div className="mt-0.5 rounded-full bg-green-50 p-1 border border-green-200">
+                        <Check className="h-4 w-4 text-green-600" />
                       </div>
-                      <span className="flex-1 text-sm leading-relaxed font-medium">{feature}</span>
+                      <span className="flex-1 text-sm leading-relaxed font-medium text-gray-700">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -118,14 +118,14 @@ export default function PricingPage() {
                 <Button
                   className={`w-full h-12 font-bold transition-all ${
                     isProfessional
-                      ? "btn-premium bg-gradient-primary hover:shadow-xl hover:shadow-primary/50 text-white"
-                      : "bg-primary/10 text-primary hover:bg-primary/20 border border-primary/30"
+                      ? "bg-blue-600 text-white hover:bg-blue-700 shadow-lg"
+                      : "bg-white text-blue-600 hover:bg-gray-50 border-2 border-blue-600"
                   }`}
                 >
                   {isProfessional ? "Start Free Trial" : "Get Started"}
                 </Button>
 
-                <p className="text-center text-xs text-muted-foreground">
+                <p className="text-center text-xs text-gray-500">
                   No credit card required ? Cancel anytime
                 </p>
               </CardContent>
@@ -136,7 +136,7 @@ export default function PricingPage() {
 
       {/* Trust Section */}
       <div className="mt-20 text-center">
-        <p className="mb-8 text-sm text-muted-foreground font-semibold">
+        <p className="mb-8 text-sm text-gray-600 font-semibold">
           All plans include:
         </p>
         <div className="flex flex-wrap justify-center gap-8">
@@ -148,8 +148,8 @@ export default function PricingPage() {
             "Live Trading Algorithms",
             "Real ROI Tracking",
           ].map((item, index) => (
-            <div key={index} className="flex items-center gap-2 text-sm font-medium">
-              <Check className="h-4 w-4 text-success" />
+            <div key={index} className="flex items-center gap-2 text-sm font-medium text-gray-700">
+              <Check className="h-4 w-4 text-green-600" />
               <span>{item}</span>
             </div>
           ))}
