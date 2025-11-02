@@ -111,6 +111,7 @@ class AIPredictiveModel:
 
 export function AlgorithmShowcase() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[0]);
+  const [isCodeVisible, setIsCodeVisible] = useState(true);
 
   return (
     <div>
@@ -128,24 +129,40 @@ export function AlgorithmShowcase() {
         </p>
       </div>
 
-      {/* Algorithm Cards */}
+      {/* Algorithm Cards - Enhanced interactions */}
       <div className="mb-12 grid gap-6 md:grid-cols-3">
         {algorithms.map((algo) => (
           <Card
             key={algo.id}
-            className={`cursor-pointer transition-all ${
+            className={`cursor-pointer transition-all duration-200 ${
               selectedAlgorithm.id === algo.id
-                ? "border-blue-500 ring-2 ring-blue-100 shadow-lg"
-                : "border-gray-200 hover:border-gray-300"
+                ? "border-blue-500 ring-2 ring-blue-100 shadow-lg scale-105"
+                : "border-gray-200 hover:border-gray-300 hover:shadow-md"
             }`}
-            onClick={() => setSelectedAlgorithm(algo)}
+            onClick={() => {
+              setSelectedAlgorithm(algo);
+              setIsCodeVisible(false);
+              setTimeout(() => setIsCodeVisible(true), 150);
+            }}
+            onMouseEnter={(e) => {
+              if (selectedAlgorithm.id !== algo.id) {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (selectedAlgorithm.id !== algo.id) {
+                e.currentTarget.style.transform = 'translateY(0)';
+              }
+            }}
           >
             <CardHeader>
               <div className="mb-4 flex items-center justify-between">
-                <div className="rounded-xl bg-blue-50 p-3 text-blue-600">
+                <div className={`rounded-xl bg-blue-50 p-3 text-blue-600 transition-transform duration-200 ${
+                  selectedAlgorithm.id === algo.id ? 'scale-110 rotate-3' : ''
+                }`}>
                   <Brain className="h-6 w-6" />
                 </div>
-                <Badge className="bg-green-50 text-green-700 border-green-200">
+                <Badge className="bg-green-50 text-green-700 border-green-200 badge-pulse">
                   {algo.winRate}
                 </Badge>
               </div>
@@ -168,8 +185,8 @@ export function AlgorithmShowcase() {
         ))}
       </div>
 
-      {/* Code Display */}
-      <Card className="border-gray-200 shadow-lg">
+      {/* Code Display - Enhanced */}
+      <Card className="border-gray-200 shadow-lg animate-scale-in">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
@@ -184,16 +201,19 @@ export function AlgorithmShowcase() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="overflow-x-auto rounded-lg bg-gray-900 p-6 border border-gray-800">
+          <div className={`overflow-x-auto rounded-lg bg-gray-900 p-6 border border-gray-800 transition-opacity duration-200 ${
+            isCodeVisible ? 'opacity-100' : 'opacity-0'
+          }`}>
             <pre className="text-sm text-gray-100 font-mono leading-relaxed">
               <code>{selectedAlgorithm.code}</code>
             </pre>
           </div>
           <div className="mt-6 flex items-center justify-between">
-            <div className="text-sm text-gray-600">
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
               <span className="font-semibold text-green-600">Live:</span> This algorithm is actively trading
             </div>
-            <Button variant="outline" size="sm" className="border-gray-300">
+            <Button variant="outline" size="sm" className="border-gray-300 hover:bg-gray-50 transition-all duration-200 hover:scale-105">
               Deploy This Algorithm
             </Button>
           </div>

@@ -8,6 +8,7 @@ export function Stats() {
       change: "+2,431 this month",
       icon: Coins,
       color: "text-blue-600",
+      bgColor: "bg-blue-50",
     },
     {
       label: "AI Accuracy",
@@ -15,6 +16,7 @@ export function Stats() {
       change: "Industry leading",
       icon: TrendingUp,
       color: "text-green-600",
+      bgColor: "bg-green-50",
     },
     {
       label: "Active Traders",
@@ -22,6 +24,7 @@ export function Stats() {
       change: "+127% YoY growth",
       icon: Users,
       color: "text-amber-600",
+      bgColor: "bg-amber-50",
     },
     {
       label: "Avg. Returns",
@@ -29,6 +32,7 @@ export function Stats() {
       change: "Per user annually",
       icon: DollarSign,
       color: "text-green-600",
+      bgColor: "bg-green-50",
     },
   ];
 
@@ -39,10 +43,11 @@ export function Stats() {
         return (
           <div
             key={index}
-            className="rounded-xl border border-gray-200 bg-white p-6 hover:shadow-lg transition-shadow"
+            className="rounded-xl border border-gray-200 bg-white p-6 hover-lift cursor-pointer transition-all duration-200 animate-scale-in"
+            style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <div className="mb-4 flex items-center justify-between">
-              <div className={`rounded-lg bg-gray-50 p-2.5 ${stat.color}`}>
+            <div className="mb-4">
+              <div className={`inline-flex rounded-lg ${stat.bgColor} p-2.5 ${stat.color}`}>
                 <Icon className="h-5 w-5" />
               </div>
             </div>
