@@ -3,38 +3,38 @@ import { Twitter, Github, Mail } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card">
+    <footer className="border-t border-gray-200 bg-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div>
-            <h3 className="mb-4 text-lg font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+            <h3 className="mb-4 text-lg font-bold text-gray-900">
               DIPNOMICS
             </h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-gray-600">
               Professional trading platform with AI-powered predictions
             </p>
           </div>
           
           <div>
-            <h4 className="mb-4 font-semibold">Features</h4>
+            <h4 className="mb-4 font-semibold text-gray-900">Features</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/auto-trade" className="text-muted-foreground hover:text-foreground">
+                <Link href="/auto-trade" className="text-gray-600 hover:text-gray-900">
                   Auto Trading
                 </Link>
               </li>
               <li>
-                <Link href="/manual-trade" className="text-muted-foreground hover:text-foreground">
+                <Link href="/manual-trade" className="text-gray-600 hover:text-gray-900">
                   Manual Trading
                 </Link>
               </li>
               <li>
-                <Link href="/market" className="text-muted-foreground hover:text-foreground">
+                <Link href="/market" className="text-gray-600 hover:text-gray-900">
                   Market Data
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="text-muted-foreground hover:text-foreground">
+                <Link href="/portfolio" className="text-gray-600 hover:text-gray-900">
                   Portfolio
                 </Link>
               </li>
@@ -42,20 +42,20 @@ export function Footer() {
           </div>
           
           <div>
-            <h4 className="mb-4 font-semibold">Support</h4>
+            <h4 className="mb-4 font-semibold text-gray-900">Support</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/terms" className="text-muted-foreground hover:text-foreground">
+                <Link href="/terms" className="text-gray-600 hover:text-gray-900">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-muted-foreground hover:text-foreground">
+                <Link href="/privacy" className="text-gray-600 hover:text-gray-900">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-foreground">
+                <Link href="/contact" className="text-gray-600 hover:text-gray-900">
                   Contact Us
                 </Link>
               </li>
@@ -63,23 +63,23 @@ export function Footer() {
           </div>
           
           <div>
-            <h4 className="mb-4 font-semibold">Connect</h4>
+            <h4 className="mb-4 font-semibold text-gray-900">Connect</h4>
             <div className="flex space-x-4">
               <Link
                 href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
               >
                 <Twitter className="h-5 w-5" />
               </Link>
               <Link
                 href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
               >
                 <Github className="h-5 w-5" />
               </Link>
               <Link
                 href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
               >
                 <Mail className="h-5 w-5" />
               </Link>
@@ -87,7 +87,7 @@ export function Footer() {
           </div>
         </div>
         
-        <div className="mt-8 border-t border-border pt-8 text-center text-sm text-muted-foreground">
+        <div className="mt-8 border-t border-gray-200 pt-8 text-center text-sm text-gray-600">
           ? 2024 Dipnomics? | All Rights Reserved
         </div>
       </div>
