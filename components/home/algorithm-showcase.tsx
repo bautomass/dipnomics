@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Code, TrendingUp, Zap, Brain } from "lucide-react";
+import { Code, Brain } from "lucide-react";
 import { useState } from "react";
 
 const algorithms = [
@@ -115,15 +115,15 @@ export function AlgorithmShowcase() {
   return (
     <div>
       <div className="mb-16 text-center">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-5 py-2.5 text-sm font-bold text-primary">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-50 px-5 py-2 text-sm font-bold text-blue-700 border border-blue-100">
           <Code className="h-4 w-4" />
           <span>LIVE TRADING ALGORITHMS</span>
         </div>
-        <h2 className="mb-4 text-4xl font-extrabold md:text-5xl lg:text-6xl">
+        <h2 className="mb-4 text-4xl font-extrabold text-gray-900 md:text-5xl">
           Real Code.
           <span className="block gradient-text">Real Results.</span>
         </h2>
-        <p className="mx-auto max-w-2xl text-lg text-muted-foreground md:text-xl">
+        <p className="mx-auto max-w-2xl text-lg text-gray-600">
           These aren&apos;t demos. These are the actual algorithms generating profits for our traders right now.
         </p>
       </div>
@@ -133,34 +133,34 @@ export function AlgorithmShowcase() {
         {algorithms.map((algo) => (
           <Card
             key={algo.id}
-            className={`card-premium glass cursor-pointer transition-all ${
+            className={`cursor-pointer transition-all ${
               selectedAlgorithm.id === algo.id
-                ? "border-primary/50 ring-2 ring-primary/30"
-                : ""
+                ? "border-blue-500 ring-2 ring-blue-100 shadow-lg"
+                : "border-gray-200 hover:border-gray-300"
             }`}
             onClick={() => setSelectedAlgorithm(algo)}
           >
             <CardHeader>
               <div className="mb-4 flex items-center justify-between">
-                <div className="rounded-xl bg-gradient-primary p-3 text-white">
+                <div className="rounded-xl bg-blue-50 p-3 text-blue-600">
                   <Brain className="h-6 w-6" />
                 </div>
-                <Badge variant="success" className="bg-success/20 text-success border-success/30">
+                <Badge className="bg-green-50 text-green-700 border-green-200">
                   {algo.winRate}
                 </Badge>
               </div>
-              <CardTitle className="text-xl">{algo.name}</CardTitle>
-              <CardDescription className="text-base">{algo.description}</CardDescription>
+              <CardTitle className="text-xl text-gray-900">{algo.name}</CardTitle>
+              <CardDescription className="text-base text-gray-600">{algo.description}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Avg. Monthly ROI</span>
-                  <span className="font-bold text-success">{algo.roi}</span>
+                  <span className="text-gray-600">Avg. Monthly ROI</span>
+                  <span className="font-bold text-green-600">{algo.roi}</span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Language</span>
-                  <span className="font-semibold">{algo.language}</span>
+                  <span className="text-gray-600">Language</span>
+                  <span className="font-semibold text-gray-900">{algo.language}</span>
                 </div>
               </div>
             </CardContent>
@@ -169,31 +169,31 @@ export function AlgorithmShowcase() {
       </div>
 
       {/* Code Display */}
-      <Card className="card-premium glass border-primary/20">
+      <Card className="border-gray-200 shadow-lg">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-2xl">{selectedAlgorithm.name} - Source Code</CardTitle>
-              <CardDescription className="text-base mt-2">
+              <CardTitle className="text-2xl text-gray-900">{selectedAlgorithm.name} - Source Code</CardTitle>
+              <CardDescription className="text-base mt-2 text-gray-600">
                 Production code currently generating returns
               </CardDescription>
             </div>
-            <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30">
+            <Badge className="bg-blue-50 text-blue-700 border-blue-200">
               {selectedAlgorithm.language}
             </Badge>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="overflow-x-auto rounded-lg bg-[#0a1628] p-6 border border-white/10">
-            <pre className="text-sm text-gray-300 font-mono leading-relaxed">
+          <div className="overflow-x-auto rounded-lg bg-gray-900 p-6 border border-gray-800">
+            <pre className="text-sm text-gray-100 font-mono leading-relaxed">
               <code>{selectedAlgorithm.code}</code>
             </pre>
           </div>
           <div className="mt-6 flex items-center justify-between">
-            <div className="text-sm text-muted-foreground">
-              <span className="font-semibold text-success">Live:</span> This algorithm is actively trading
+            <div className="text-sm text-gray-600">
+              <span className="font-semibold text-green-600">Live:</span> This algorithm is actively trading
             </div>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="border-gray-300">
               Deploy This Algorithm
             </Button>
           </div>

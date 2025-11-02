@@ -11,22 +11,22 @@ interface FeatureCardProps {
 
 export function FeatureCard({ icon, title, description, highlight }: FeatureCardProps) {
   return (
-    <Card className="group card-premium glass h-full transition-all duration-500 hover:scale-[1.02]">
+    <Card className="card-premium h-full">
       <CardHeader>
         <div className="mb-4 flex items-start justify-between">
-          <div className="rounded-xl bg-gradient-primary p-3 text-white transition-transform group-hover:scale-110 group-hover:rotate-3">
+          <div className="rounded-xl bg-blue-50 p-3 text-blue-600">
             {icon}
           </div>
           {highlight && (
-            <Badge variant="success" className="bg-success/20 text-success border-success/30 font-semibold">
+            <Badge variant="success" className="bg-green-50 text-green-700 border-green-200 font-semibold">
               {highlight}
             </Badge>
           )}
         </div>
-        <CardTitle className="text-xl font-bold">{title}</CardTitle>
+        <CardTitle className="text-xl font-bold text-gray-900">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <CardDescription className="text-base leading-relaxed text-muted-foreground">
+        <CardDescription className="text-base leading-relaxed text-gray-600">
           {description}
         </CardDescription>
       </CardContent>

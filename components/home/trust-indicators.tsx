@@ -33,8 +33,8 @@ export function TrustIndicators() {
   return (
     <div>
       <div className="mb-12 text-center">
-        <h3 className="mb-2 text-2xl font-bold">Why Professionals Trust Us</h3>
-        <p className="text-muted-foreground">Institutional-grade infrastructure you can rely on</p>
+        <h3 className="mb-2 text-2xl font-bold text-gray-900">Why Professionals Trust Us</h3>
+        <p className="text-gray-600">Institutional-grade infrastructure you can rely on</p>
       </div>
       <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
         {indicators.map((indicator, index) => (
@@ -42,13 +42,13 @@ export function TrustIndicators() {
             key={index}
             className="flex flex-col items-center gap-4 text-center"
           >
-            <div className="rounded-xl bg-primary/10 p-4 text-primary">
+            <div className="rounded-xl bg-blue-50 p-4 text-blue-600">
               {indicator.icon}
             </div>
             <div>
-              <div className="mb-1 font-bold text-lg">{indicator.title}</div>
-              <div className="mb-2 text-sm text-muted-foreground">{indicator.description}</div>
-              <div className="inline-flex items-center gap-1 rounded-full bg-success/10 px-3 py-1 text-xs font-semibold text-success border border-success/20">
+              <div className="mb-1 font-bold text-lg text-gray-900">{indicator.title}</div>
+              <div className="mb-2 text-sm text-gray-600">{indicator.description}</div>
+              <div className="inline-flex items-center gap-1 rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700 border border-green-200">
                 <CheckCircle2 className="h-3 w-3" />
                 {indicator.badge}
               </div>
