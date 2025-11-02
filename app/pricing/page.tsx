@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, Zap, Crown, Rocket } from "lucide-react";
+import { Check, Zap, Crown, Rocket, TrendingUp } from "lucide-react";
 import { pricingPlans } from "@/lib/pricing";
 import type { SubscriptionPeriod } from "@/types";
 
@@ -14,35 +14,36 @@ export default function PricingPage() {
     <div className="container mx-auto px-4 py-12 md:py-20">
       {/* Hero Section */}
       <div className="mx-auto mb-16 max-w-4xl text-center">
-        <div className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
-          PRICING THAT SCALES WITH YOU
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-5 py-2.5 text-sm font-bold text-primary tracking-wide">
+          <TrendingUp className="h-4 w-4" />
+          <span>PROFESSIONAL TRADING PLATFORMS</span>
         </div>
         <h1 className="mb-4 text-5xl font-extrabold md:text-6xl lg:text-7xl">
           Choose Your
           <span className="block gradient-text">Success Level</span>
         </h1>
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground md:text-xl">
-          Start free, scale as you grow. Every plan includes our 96% accurate AI trading engine.
+          Every plan includes our profit-generating algorithms. No promises?just results.
         </p>
       </div>
 
       {/* Period Selector - Premium Design */}
       <div className="mb-12 flex justify-center">
-        <div className="glass rounded-full border border-border/50 p-1 inline-flex gap-2">
+        <div className="glass rounded-full border border-white/10 p-1 inline-flex gap-2">
           {(["monthly", "quarterly", "yearly"] as SubscriptionPeriod[]).map((p) => (
             <Button
               key={p}
               variant={period === p ? "default" : "ghost"}
               onClick={() => setPeriod(p)}
-              className={`relative capitalize transition-all ${
+              className={`relative capitalize transition-all font-semibold ${
                 period === p
-                  ? "bg-gradient-primary shadow-lg shadow-primary/50"
-                  : "hover:bg-accent/50"
+                  ? "bg-gradient-primary shadow-lg shadow-primary/50 text-white"
+                  : "hover:bg-white/5"
               }`}
             >
               {p}
               {p === "yearly" && (
-                <span className="ml-2 rounded-full bg-success/20 px-2 py-0.5 text-xs text-success">
+                <span className="ml-2 rounded-full bg-success/20 px-2 py-0.5 text-xs text-success font-bold">
                   Save 33%
                 </span>
               )}
@@ -67,7 +68,7 @@ export default function PricingPage() {
               key={plan.plan}
               className={`group relative h-full transition-all duration-500 ${
                 isProfessional
-                  ? "card-premium border-primary/50 shadow-2xl shadow-primary/20 scale-105 md:scale-110"
+                  ? "card-premium border-primary/50 shadow-2xl shadow-primary/30 scale-105 md:scale-110 ring-2 ring-primary/20"
                   : "card-premium glass hover:scale-105"
               }`}
             >
@@ -82,13 +83,13 @@ export default function PricingPage() {
                   <div
                     className={`rounded-xl p-3 ${
                       isProfessional
-                        ? "bg-gradient-primary text-white"
+                        ? "bg-gradient-primary text-white shadow-lg shadow-primary/50"
                         : "bg-primary/10 text-primary"
                     }`}
                   >
                     <Icon className="h-6 w-6" />
                   </div>
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
+                  <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
                 </div>
 
                 <div className="mb-2">
@@ -96,7 +97,7 @@ export default function PricingPage() {
                   <span className="text-muted-foreground">/{period.slice(0, 3)}</span>
                 </div>
                 {plan.savings && (
-                  <div className="inline-block rounded-full bg-success/20 px-3 py-1 text-sm font-semibold text-success">
+                  <div className="inline-block rounded-full bg-success/20 px-3 py-1 text-sm font-bold text-success border border-success/30">
                     {plan.savings}
                   </div>
                 )}
@@ -106,19 +107,19 @@ export default function PricingPage() {
                 <ul className="space-y-4">
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start gap-3">
-                      <div className="mt-0.5 rounded-full bg-success/20 p-1">
+                      <div className="mt-0.5 rounded-full bg-success/20 p-1 border border-success/30">
                         <Check className="h-4 w-4 text-success" />
                       </div>
-                      <span className="flex-1 text-sm leading-relaxed">{feature}</span>
+                      <span className="flex-1 text-sm leading-relaxed font-medium">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Button
-                  className={`w-full h-12 font-semibold transition-all ${
+                  className={`w-full h-12 font-bold transition-all ${
                     isProfessional
-                      ? "btn-premium bg-gradient-primary hover:shadow-xl hover:shadow-primary/50"
-                      : "bg-primary/10 text-primary hover:bg-primary/20"
+                      ? "btn-premium bg-gradient-primary hover:shadow-xl hover:shadow-primary/50 text-white"
+                      : "bg-primary/10 text-primary hover:bg-primary/20 border border-primary/30"
                   }`}
                 >
                   {isProfessional ? "Start Free Trial" : "Get Started"}
@@ -135,17 +136,19 @@ export default function PricingPage() {
 
       {/* Trust Section */}
       <div className="mt-20 text-center">
-        <p className="mb-8 text-sm text-muted-foreground">
+        <p className="mb-8 text-sm text-muted-foreground font-semibold">
           All plans include:
         </p>
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="flex flex-wrap justify-center gap-8">
           {[
             "24/7 Customer Support",
-            "Bank-Level Security",
+            "Enterprise Security",
             "30-Day Money-Back Guarantee",
             "Free Updates Forever",
+            "Live Trading Algorithms",
+            "Real ROI Tracking",
           ].map((item, index) => (
-            <div key={index} className="flex items-center gap-2 text-sm">
+            <div key={index} className="flex items-center gap-2 text-sm font-medium">
               <Check className="h-4 w-4 text-success" />
               <span>{item}</span>
             </div>
